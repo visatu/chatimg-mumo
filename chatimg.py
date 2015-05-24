@@ -29,7 +29,7 @@
 
 
 #
-# urltoimg.py
+# chatimg.py
 # Post images into mumble chat through data injection, creates thumbnails for images that are too large.
 #
 from PIL import Image
@@ -44,8 +44,8 @@ import re
 import ImageFile
 
 
-class urltoimg(MumoModule):
-    default_config = {'urltoimg':(
+class chatimg(MumoModule):
+    default_config = {'chatimg':(
                                 ('servers', commaSeperatedIntegers, []),
                                 ('keyword', str, '!img'),
                                 ('shebang_required', int, 1),
@@ -72,7 +72,7 @@ class urltoimg(MumoModule):
     def __init__(self, name, manager, configuration = None):
         MumoModule.__init__(self, name, manager, configuration)
         self.murmur = manager.getMurmurModule()
-        self.keyword = self.cfg().urltoimg.keyword
+        self.keyword = self.cfg().chatimg.keyword
 
     def connected(self):
         """Callback for connection, sets up registration as a handler to all server methods.
@@ -80,7 +80,7 @@ class urltoimg(MumoModule):
         manager = self.manager()
         self.log().debug("Register [%s] callbacks", self.name())
 
-        manager.subscribeServerCallbacks(self, self.cfg().urltoimg.servers or manager.SERVERS_ALL)
+        manager.subscribeServerCallbacks(self, self.cfg().chatimg.servers or manager.SERVERS_ALL)
 
     def readImageDataPerByte(self, open_url):
         """Utility method for reading a an image, reads 1kb at a time.
@@ -142,7 +142,7 @@ class urltoimg(MumoModule):
                             '" %s />' % self.getModifiers(img_info))
         else:
             image = Image.open(StringIO.StringIO(open_url.read()))
-            image.thumbnail((self.cfg().urltoimg.max_width, self.cfg().urltoimg.max_height), Image.ANTIALIAS)
+            image.thumbnail((self.cfg().chatimg.max_width, self.cfg().chatimg.max_height), Image.ANTIALIAS)
             trans = StringIO.StringIO()
             image.save(trans, format="JPEG")
             encoded = base64.b64encode(trans.getvalue())
@@ -162,8 +162,8 @@ class urltoimg(MumoModule):
         modifiers = ""
         width_percent_reduction = 0
         height_percent_reduction = 0
-        max_width = float(self.cfg().urltoimg.max_width)
-        max_height = float(self.cfg().urltoimg.max_height)
+        max_width = float(self.cfg().chatimg.max_width)
+        max_height = float(self.cfg().chatimg.max_height)
         if max_width and img_info.width > max_width:
             width_percent_reduction = (img_info.width / max_width) - 1.0
         if max_height and img_info > max_height:
@@ -190,7 +190,7 @@ class urltoimg(MumoModule):
         if message.text.startswith(self.keyword):
             msg = message.text[len(self.keyword):].strip()
             shebang_used = True
-        elif not self.cfg().urltoimg.shebang_required:
+        elif not self.cfg().chatimg.shebang_required:
             msg = message.text
 
         if msg:
