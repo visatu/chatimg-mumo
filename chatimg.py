@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
 
-##Reference code by:
-##
+# Written by:
+# Alexei Kozlenok
+
+# Reference code by:
+# Ilari Lind
+# Stefan Hacker
 
 # This is free and unencumbered software released into the public domain.
 #
