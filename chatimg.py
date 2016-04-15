@@ -36,7 +36,6 @@
 # chatimg.py
 # Post images into mumble chat through data injection, creates thumbnails for images that are too large.
 #
-from PIL import Image
 import StringIO
 
 from mumo_module import (commaSeperatedIntegers,
@@ -45,8 +44,13 @@ from mumo_module import (commaSeperatedIntegers,
 import urllib2
 import base64
 import re
-import ImageFile
 
+try:
+    import ImageFile
+    import Image
+except ImportError:
+    from PIL import ImageFile
+    from PIL import Image
 
 class chatimg(MumoModule):
     default_config = {'chatimg':(
