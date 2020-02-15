@@ -5,6 +5,8 @@ Posts a random image from a configured folder based on a keyword given. Perfect 
 
 Configurable keyword for a "true random" image within ALL keyword configured folders
 
+![randimg in action](randimg_cat.png)
+
 ## Folder structure
 Keyword and image folder names should match. e.g.:
 
