@@ -1,7 +1,21 @@
-# chatimg-mumo
-image poster and thumbnailer for mumble through murmur/mumo.
+# randimg-mumo
+Random image poster for murmur / mumo based on 'chatimg' module
 
-Allows for conversion of any url into an embeded image inside of the mumble chat window.
-Can set a limitation to width and height of images which are then converted ont he fly to thumbnails of that size if the image exceeds specification.
-Can convert any number of image links in chat to be sent to the users.
-Can be setup to get inline links from all chat, and convert them to images if images are present.
+Posts a random image from a configured folder based on a keyword given. Perfect for a shitposting mumble community.
+
+Configurable keyword for a "true random" image within ALL keyword configured folders
+
+## Folder structure
+Keyword and image folder names should match. e.g.:
+
+`keywords = rand, smug, cats`
+
+Folders:
+
+- (base directory)
+  - **rand**
+    - (images)
+  - **smug**
+    - (images)
+  - **cats**
+    - (images)
